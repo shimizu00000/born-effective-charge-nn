@@ -1,0 +1,90 @@
+rc       = 5.0d0
+rn       = 1.0d0
+neighbor = 400
+phi      = tanh # activation_function
+
+dir_data = "../../step2_data_binary/data"
+dir_sf   = "../../step3_sf/data_sf/rc_7"
+
+element_a   = Li 1
+node_in_a   = 85 # sum over the sf functions
+num_g2_a_a  = 5
+num_g2_a_b  = 5
+num_g2_a_c  = 5
+num_g5_a_aa = 10
+num_g5_a_ab = 10
+num_g5_a_ac = 10
+num_g5_a_bb = 10
+num_g5_a_bc = 10
+num_g5_a_cc = 10
+
+element_b   = P 2
+node_in_b   = 85
+num_g2_b_a  = 5
+num_g2_b_b  = 5
+num_g2_b_c  = 5
+num_g5_b_aa = 10
+num_g5_b_ab = 10
+num_g5_b_ac = 10
+num_g5_b_bb = 10
+num_g5_b_bc = 10
+num_g5_b_cc = 10
+
+element_c   = O 3
+node_in_c   = 85
+num_g2_c_a  = 5
+num_g2_c_b  = 5
+num_g2_c_c  = 5
+num_g5_c_aa = 10
+num_g5_c_ab = 10
+num_g5_c_ac = 10
+num_g5_c_bb = 10
+num_g5_c_bc = 10
+num_g5_c_cc = 10
+
+#Cutoff distance for neighboring atoms
+#list contains the atoms within Rc+Rn
+#Rn = 1.0d0
+#Rn = 2.0d0
+#Rn = 3.0d0
+#Rn = 4.0d0
+#Max number of neighboring atoms
+#neighbor = 150 ! Rn = 1.0
+#neighbor = 192 ! Rn = 2.0
+#neighbor = 240 ! Rn = 3.0
+#neighbor = 336 ! Rn = 4.0
+
+# No. of nodes
+
+nnp_io_a   = 1 # on:1 off:0
+nlayer_a   = 4 # Number of layers including input and output
+node_h1_a  = 10 # Number of nodes
+node_h2_a  = 10
+node_out_a = 1
+
+nnp_io_b   = 1
+nlayer_b   = 4
+node_h1_b  = 10
+node_h2_b  = 10
+node_out_b = 1
+
+nnp_io_c   = 1
+nlayer_c   = 4
+node_h1_c  = 10
+node_h2_c  = 10
+node_out_c = 1
+
+memory = 100
+iprint = 1
+
+weight_io   = 0     # 0: from scrach, 1: from file
+list_io     = 0     # 0: from scrach, 1: from file (use same #mpi)
+percent_tst = 10    # % of test  # 0: not monitor, 1: monitor
+weight_test = 50     # >=1
+factr = 1.0d+3       # 1.0d+7(def) 1.0d+9(lower accuracy) 1.0d+5(higher accuracy)
+pgtol = 1.0d-3      # 1.0d-5(def) 1.0d-3(lower accuracy) 1.0d-7(higher accuracy)
+alpha = 1.0d0       # E 
+beta  = 1.0d0       # F
+rmse_e_thr = 0.00010d0   # eV/atom 
+rmse_f_thr = 0.0010d0   # eV/ang
+max_epoch  = 10000       # Number of iterations
