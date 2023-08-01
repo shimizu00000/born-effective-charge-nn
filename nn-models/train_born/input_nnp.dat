@@ -1,0 +1,77 @@
+rc       = 7.0d0
+rn       = 1.0d0
+neighbor = 350
+phi      = tanh # activation_function
+
+dir_data = "../step2_data_binary/data"
+dir_sf   = "../step3_vaf/data_vaf"
+
+element_a   = Li 1
+node_in_a   = 180 # sum over the sf functions
+num_g2_a_a  = 8
+num_g2_a_b  = 8
+num_g2_a_c  = 8
+num_g5_a_aa = 26
+num_g5_a_ab = 26
+num_g5_a_ac = 26
+num_g5_a_bb = 26
+num_g5_a_bc = 26
+num_g5_a_cc = 26
+
+element_b   = P 2
+node_in_b   = 180
+num_g2_b_a  = 8
+num_g2_b_b  = 8
+num_g2_b_c  = 8
+num_g5_b_aa = 26
+num_g5_b_ab = 26
+num_g5_b_ac = 26
+num_g5_b_bb = 26
+num_g5_b_bc = 26
+num_g5_b_cc = 26
+
+element_c   = O 3
+node_in_c   = 180
+num_g2_c_a  = 8
+num_g2_c_b  = 8
+num_g2_c_c  = 8
+num_g5_c_aa = 26
+num_g5_c_ab = 26
+num_g5_c_ac = 26
+num_g5_c_bb = 26
+num_g5_c_bc = 26
+num_g5_c_cc = 26
+
+
+memory = 100
+iprint = 1
+
+# No. of nodes
+
+nnp_io_a   = 1  # on:1 off:0
+nlayer_a   = 4  # Number of layers including input and output
+node_h1_a  = 10 # Number of nodes
+node_h2_a  = 10
+node_out_a = 1
+
+nnp_io_b   = 1
+nlayer_b   = 4
+node_h1_b  = 10
+node_h2_b  = 10
+node_out_b = 1
+
+nnp_io_c   = 1
+nlayer_c   = 4
+node_h1_c  = 10
+node_h2_c  = 10
+node_out_c = 1
+
+percent_tst = 10    # % of test
+
+weight_io = 1  # 0: from scrach, 1: from file
+factr     = 1.0d+10
+pgtol     = 1.0d-3
+alpha     = 0.0d+0
+beta      = 1.0d+0
+
+weight_test = 2
