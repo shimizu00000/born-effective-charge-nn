@@ -1,0 +1,27 @@
+units         metal
+atom_style    atomic
+neighbor      1.0 bin
+neigh_modify  every 1 delay 0 check yes
+
+boundary        p p p
+atom_modify map array sort 0 0.0
+variable	u uloop 8
+
+read_data   initial.lammps
+pair_style  hybrid/overlay nnp3v nnp3v_vf
+pair_coeff  * * nnp3v lammps-force.nnp Li P O
+pair_coeff  * * nnp3v_vf lammps_rot.nnp Li P O
+min_style   quickmin
+minimize    1.0e-6 1.0e-4 1000 10000
+
+reset_timestep	0
+
+#timestep   0.001
+#velocity   all create 1000 87287
+
+dump   1 all atom 1 dump.neb.$u
+fix    2 all neb 1.0 parallel neigh
+dump   2 all atom 1 test.dump
+
+thermo          1
+neb 0.00000000001 0.0 10000 5000 1 final final.lammps
