@@ -1,0 +1,45 @@
+#--- Initialize Simulation ---
+clear
+units           metal
+atom_style      atomic
+dimension       3
+boundary        p p p
+
+read_data       data.lammps
+region          region1 block 0 1 0 1 0 1 #units lattice
+
+#--- Define Interatomic Potential ---
+pair_style hybrid/overlay nnp3v nnp3v_vf
+pair_coeff * * nnp3v lammps-force.nnp Li P O
+pair_coeff * * nnp3v_vf lammps_rot.nnp Li P O
+neighbor        1.0 bin
+neigh_modify    every 1 delay 0 check yes
+
+#--- Equilibration ---
+reset_timestep  0
+timestep        1.0e-3
+
+variable        times equal step
+variable        energy equal etotal
+variable        pp equal pe
+variable        temperature equal temp
+variable        pres equal press
+
+velocity        all create 800.0 87287 mom yes rot no
+
+# Set thermo output
+thermo          1
+thermo_style    custom step pe etotal temp press
+
+compute         c1 all temp
+compute         c2 all pressure c1 #thermo_temp
+
+fix             f1 all nvt temp 800.0 800.0 0.1
+
+fix             energy all print 1 "${times} ${pp} ${energy} ${temperature} ${pres}" file out screen no
+dump            d1 all custom 10 force.dat id type x y z fx fy fz
+dump            d2 all custom 10 position.* id type x y z
+dump            d3 all atom   10 dump.melt
+
+# Run
+run    3000000
